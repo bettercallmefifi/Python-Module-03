@@ -25,7 +25,8 @@ def ft_inventory_system():
     print(f"Unique item type: {len(inventory)}\n")
 
     print("=== Current Inventory ===")
-    for item, qty in sorted(inventory.items(), key=lambda x: -x[1]):
+    for item, qty in sorted(inventory.items(),
+                            key=lambda x: x[1], reverse=True):
         parcent = qty / total_item * 100
         unit = "unit" if qty == 1 else "units"
         print(f"{item}: {qty} {unit} ({parcent:.1f}%)")
