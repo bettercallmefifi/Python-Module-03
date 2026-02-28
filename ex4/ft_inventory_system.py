@@ -40,7 +40,8 @@ def ft_inventory_system():
     )
     unitos = "unit" if qty == 1 else "units"
     print(
-        f"Least abundant: {least_abundant} ({inventory[least_abundant]} {unitos})\n"
+        f"Least abundant: {least_abundant}"
+        f"({inventory[least_abundant]} {unitos})\n"
     )
 
     print("=== Item Categories ===")
