@@ -8,8 +8,12 @@ def ft_inventory_system():
     inventory = dict()
     for arg in args:
         if ":" in arg:
-            name, qty = arg.split(":")
-            inventory[name] = int(qty)
+            name, qty = arg.split(":", 1)
+            try:
+                inventory[name] = int(qty)
+            except ValueError:
+                # skip malformed quantity
+                continue
 
     if not inventory:
         print(
@@ -27,28 +31,27 @@ def ft_inventory_system():
     print("=== Current Inventory ===")
     for item, qty in sorted(inventory.items(),
                             key=lambda x: x[1], reverse=True):
-        parcent = qty / total_item * 100
+        percent = qty / total_item * 100
         unit = "unit" if qty == 1 else "units"
-        print(f"{item}: {qty} {unit} ({parcent:.1f}%)")
+        print(f"{item}: {qty} {unit} ({percent:.1f}%)")
 
     print()
     print("=== Inventory Statistics ===")
     most_abundant = max(inventory.items(), key=lambda x: x[1])[0]
     least_abundant = min(inventory.items(), key=lambda x: x[1])[0]
-    unit = "unit" if most_abundant == 1 else "units"
+    most_qty = inventory[most_abundant]
+    least_qty = inventory[least_abundant]
+    unit_most = "unit" if most_qty == 1 else "units"
+    unit_least = "unit" if least_qty == 1 else "units"
     print(
-        f"Most abundant: {most_abundant} ({inventory[most_abundant]} {unit})"
+        f"Most abundant: {most_abundant} ({most_qty} {unit_most})"
     )
-    unitos = "unit" if qty == 1 else "units"
     print(
-        f"Least abundant: {least_abundant}"
-        f"({inventory[least_abundant]} {unitos})\n"
+        f"Least abundant: {least_abundant} ({least_qty} {unit_least})\n"
     )
 
     print("=== Item Categories ===")
-    moderate = {
-        item: qty for item, qty in inventory.items() if qty >= 5
-    }
+    moderate = {item: qty for item, qty in inventory.items() if qty >= 5}
     scarce = {item: qty for item, qty in inventory.items() if qty < 5}
     print(f"Moderate: {moderate}")
     print(f"Scarce: {scarce}\n")
@@ -59,7 +62,7 @@ def ft_inventory_system():
 
     print("=== Dictionary Properties Demo ===")
     print(f"Dictionary keys: {list(inventory.keys())}")
-    print(f"Dictionary value: {list(inventory.values())}")
+    print(f"Dictionary values: {list(inventory.values())}")
     sample_item = "sword"
     print(
         "Sample lookup - "

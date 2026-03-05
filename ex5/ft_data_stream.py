@@ -14,18 +14,18 @@ def game_event_stream(n):
     ]
 
     for i in range(1, n + 1):
-        player, level = players[i % len(players)]
-        action = actions[i % len(actions)]
+        player, level = players[(i - 1) % len(players)]
+        action = actions[(i - 1) % len(actions)]
         yield i, player, level, action
 
 
-def analyse_events(even_stream):
+def analyse_events(event_stream):
     total = 0
     high_level = 0
     treasure = 0
     level_up = 0
 
-    it = iter(even_stream)
+    it = iter(event_stream)
 
     while True:
         try:
@@ -41,8 +41,8 @@ def analyse_events(even_stream):
 
             if event_id <= 3:
                 print(
-                    f"Event {event_id}: Player {player}"
-                    f"(level {level} {action})"
+                    f"Event {event_id}: "
+                    f"Player {player} (level {level}) {action}"
                 )
 
         except StopIteration:

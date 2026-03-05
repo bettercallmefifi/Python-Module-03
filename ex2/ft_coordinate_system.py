@@ -1,11 +1,11 @@
 import math
 
 
-def creat_3D_positions(x: int, y: int, z: int) -> tuple[int, int, int]:
+def create_3D_positions(x: int, y: int, z: int) -> tuple[int, int, int]:
     return (x, y, z)
 
 
-def distance_3D(p1, p2) -> int:
+def distance_3D(p1, p2) -> float:
     return math.sqrt(
         (p2[0] - p1[0]) ** 2
         + (p2[1] - p1[1]) ** 2
@@ -13,15 +13,15 @@ def distance_3D(p1, p2) -> int:
     )
 
 
-def parse_coordinates(cooredinae_str):
+def parse_coordinates(coordinate_str):
     try:
-        parts = cooredinae_str.split(",")
-        pos = (int(parts[0])), int(parts[1]), (int(parts[2]))
+        parts = coordinate_str.split(",")
+        pos = (int(parts[0]), int(parts[1]), int(parts[2]))
         return pos
     except Exception as e:
         print("Error parsing coordinates:", e)
         print(
-            "Error details - Type:", type(e).__name__, ",Args", e.args
+            "Error details - Type:", type(e).__name__, ",Args:", e.args
         )
         return None
 
@@ -35,7 +35,7 @@ def unpack_position(pos):
 
 def main():
     print("=== Game Coordinate System ===\n")
-    pos1 = creat_3D_positions(10, 20, 5)
+    pos1 = create_3D_positions(10, 20, 5)
     print("Position created:", pos1)
     print(
         "Distance between (0, 0, 0) and "
