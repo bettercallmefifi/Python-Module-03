@@ -1,18 +1,18 @@
 import sys
+from typing import Dict
 
 
-def ft_inventory_system():
+def ft_inventory_system() -> None:
 
     args = sys.argv[1:]
 
-    inventory = dict()
+    inventory: Dict[str, int] = dict()
     for arg in args:
         if ":" in arg:
             name, qty = arg.split(":", 1)
             try:
                 inventory[name] = int(qty)
             except ValueError:
-                # skip malformed quantity
                 continue
 
     if not inventory:

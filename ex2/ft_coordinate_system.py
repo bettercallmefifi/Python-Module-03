@@ -5,7 +5,7 @@ def create_3D_positions(x: int, y: int, z: int) -> tuple[int, int, int]:
     return (x, y, z)
 
 
-def distance_3D(p1, p2) -> float:
+def distance_3D(p1: tuple[int, int, int], p2: tuple[int, int, int]) -> float:
     return math.sqrt(
         (p2[0] - p1[0]) ** 2
         + (p2[1] - p1[1]) ** 2
@@ -13,7 +13,7 @@ def distance_3D(p1, p2) -> float:
     )
 
 
-def parse_coordinates(coordinate_str):
+def parse_coordinates(coordinate_str: str) -> tuple[int, int, int] | None:
     try:
         parts = coordinate_str.split(",")
         pos = (int(parts[0]), int(parts[1]), int(parts[2]))
@@ -26,14 +26,14 @@ def parse_coordinates(coordinate_str):
         return None
 
 
-def unpack_position(pos):
+def unpack_position(pos: tuple[int, int, int]) -> None:
     x, y, z = pos
     print("Unpacking demonstration:")
     print(f"Player at x={x}, y={y}, z={z}")
     print(f"Coordinates: X={x}, Y={y}, Z={z}")
 
 
-def main():
+def main() -> None:
     print("=== Game Coordinate System ===\n")
     pos1 = create_3D_positions(10, 20, 5)
     print("Position created:", pos1)

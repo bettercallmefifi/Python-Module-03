@@ -1,5 +1,10 @@
-def game_event_stream(n):
-    players = [
+from typing import Generator, Tuple
+
+
+def game_event_stream(
+    n: int,
+) -> Generator[Tuple[int, str, int, str], None, None]:
+    players: list[tuple[str, int]] = [
         ("Alice", 5),
         ("Bob", 12),
         ("Charlie", 8),
@@ -7,7 +12,7 @@ def game_event_stream(n):
         ("Eva", 20),
     ]
 
-    actions = [
+    actions: list[str] = [
         "killed monster",
         "found treasure",
         "leveled up",
@@ -19,11 +24,14 @@ def game_event_stream(n):
         yield i, player, level, action
 
 
-def analyse_events(event_stream):
-    total = 0
-    high_level = 0
-    treasure = 0
-    level_up = 0
+def analyse_events(
+    event_stream: Generator[Tuple[int, str, int, str], None, None],
+) -> Tuple[int, int, int, int]:
+
+    total: int = 0
+    high_level: int = 0
+    treasure: int = 0
+    level_up: int = 0
 
     it = iter(event_stream)
 
@@ -51,16 +59,17 @@ def analyse_events(event_stream):
     return total, high_level, treasure, level_up
 
 
-def fibonacci(n):
-    a, b = 0, 1
+def fibonacci(n: int) -> Generator[int, None, None]:
+    a: int = 0
+    b: int = 1
     for _ in range(n):
         yield a
         a, b = b, a + b
 
 
-def prime_numbers(n):
-    count = 0
-    num = 2
+def prime_numbers(n: int) -> Generator[int, None, None]:
+    count: int = 0
+    num: int = 2
     while count < n:
         for i in range(2, num):
             if num % i == 0:
@@ -71,24 +80,24 @@ def prime_numbers(n):
         num += 1
 
 
-def generator_demo():
+def generator_demo() -> None:
     print("=== Game Data Stream Processor ===")
     fib_gen = iter(fibonacci(10))
-    fib_numbers = [next(fib_gen) for _ in range(10)]
+    fib_numbers: list[int] = [next(fib_gen) for _ in range(10)]
     print(
         "Fibonacci sequence (first 10): "
         + ", ".join(str(x) for x in fib_numbers)
     )
 
     prime_gen = iter(prime_numbers(5))
-    prime_numbers_list = [next(prime_gen) for _ in range(5)]
+    prime_numbers_list: list[int] = [next(prime_gen) for _ in range(5)]
     print(
         "Prime numbers (first 5): "
         + ", ".join(str(x) for x in prime_numbers_list)
     )
 
 
-def main_stream_demo():
+def main_stream_demo() -> None:
     print("=== Game Data Stream Processor ===\n")
     print("Processing 1000 game events...\n")
 

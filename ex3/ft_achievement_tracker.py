@@ -1,4 +1,4 @@
-def ft_achievement_tracker():
+def ft_achievement_tracker() -> None:
     print("=== Achievement Tracker System ===\n")
     alice = {"first_kill", "level_10", "treasure_hunter", "speed_demon"}
     bob = {"first_kill", "level_10", "boss_slayer", "collector"}
